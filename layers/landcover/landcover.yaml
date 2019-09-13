@@ -32,11 +32,13 @@ layer:
       - dune
       - farm
       - farmland
+      - fell
       - forest
       - garden
       - glacier
       - grass
       - grassland
+      - heath
       - mangrove
       - marsh
       - meadow
@@ -49,8 +51,10 @@ layer:
       - saltmarsh
       - sand
       - scree
+      - scrub
       - swamp
       - tidalflat
+      - tundra
       - village_green
       - vineyard
       - wet_meadow
