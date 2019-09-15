@@ -327,6 +327,7 @@ BEGIN
 		LEFT OUTER JOIN osm_route_member rm6 ON rm6.member = hl.osm_id AND rm6.concurrency_index=6
 	WHERE (hl.name <> '' OR hl.ref <> '' OR rm1.ref <> '' OR rm1.network <> '')
           AND hl.highway <> ''
+          AND rm.route = 'road'
     ) AS t
     ON CONFLICT DO NOTHING;
 
