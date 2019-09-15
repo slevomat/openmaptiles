@@ -1,0 +1,853 @@
+{
+  "layers": [
+    {
+      "id": "public-transport-railway-line",
+      "type": "line",
+      "metadata": {
+        "mapbox:group": "1444849345966.4436"
+      },
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "route",
+          "railway"
+        ],
+        [
+          "==",
+          "type",
+          "path"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "square",
+        "line-join": "miter"
+      },
+      "paint": {
+        "line-color": "rgba(58, 58, 58, 1)",
+        "line-width": {
+          "stops": [
+            [
+              10,
+              1
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              14,
+              4
+            ],
+            [
+              16,
+              6
+            ]
+          ]
+        },
+        "line-opacity": 1
+      },
+      "order": 207
+    },
+    {
+      "id": "public-transport-railway-line-white",
+      "type": "line",
+      "metadata": {
+        "mapbox:group": "1444849345966.4436"
+      },
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "route",
+          "railway"
+        ],
+        [
+          "==",
+          "type",
+          "path"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "square",
+        "line-join": "miter",
+        "line-miter-limit": 2
+      },
+      "paint": {
+        "line-color": "rgba(255, 255, 255, 1)",
+        "line-width": 3,
+        "line-opacity": 1,
+        "line-dasharray": [
+          2,
+          2
+        ],
+        "line-offset": 0
+      },
+      "order": 209
+    },
+    {
+      "id": "public-transport-railway-station-point",
+      "type": "circle",
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "route",
+          "railway"
+        ],
+        [
+          "==",
+          "type",
+          "station"
+        ]
+      ],
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "circle-color": "rgba(0, 0, 0, 1)",
+        "circle-stroke-color": "rgba(255, 255, 255, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": {
+          "stops": [
+            [
+              14,
+              4
+            ],
+            [
+              16,
+              6
+            ]
+          ]
+        }
+      },
+      "order": 210
+    },
+    {
+      "id": "public-transport-bus-line",
+      "type": "line",
+      "metadata": {
+        "mapbox:group": "1444849345966.4436"
+      },
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "route",
+          "bus"
+        ],
+        [
+          "==",
+          "type",
+          "path"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "round",
+        "line-join": "miter"
+      },
+      "paint": {
+        "line-color": "rgba(85, 117, 224, 1)",
+        "line-width": {
+          "stops": [
+            [
+              12,
+              1
+            ],
+            [
+              14,
+              2
+            ]
+          ]
+        },
+        "line-blur": 0,
+        "line-opacity": 1
+      },
+      "order": 211
+    },
+    {
+      "id": "public-transport-bus-number",
+      "type": "symbol",
+      "metadata": {
+        "mapbox:group": "1444849345966.4436"
+      },
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "route",
+          "bus"
+        ],
+        [
+          "==",
+          "type",
+          "line"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "text-field": "{ref}",
+        "text-size": 10,
+        "text-font": [
+          "Open Sans Bold"
+        ],
+        "text-anchor": "bottom",
+        "text-rotation-alignment": "auto",
+        "text-padding": 0,
+        "symbol-placement": "line",
+        "text-line-height": 1.6,
+        "text-allow-overlap": false,
+        "text-letter-spacing": 0.1,
+        "text-keep-upright": true,
+        "text-max-angle": 45
+      },
+      "paint": {
+        "text-color": "rgba(85, 117, 224, 1)",
+        "text-translate-anchor": "map",
+        "text-opacity": 1,
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1
+      },
+      "order": 212
+    },
+    {
+      "id": "public-transport-bus-station-point",
+      "type": "circle",
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "route",
+          "bus"
+        ],
+        [
+          "==",
+          "type",
+          "station"
+        ]
+      ],
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "circle-color": "rgba(85, 117, 224, 1)",
+        "circle-stroke-color": "rgba(255, 255, 255, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      },
+      "order": 213
+    },
+    {
+      "id": "public-transport-tram-line",
+      "type": "line",
+      "metadata": {
+        "mapbox:group": "1444849345966.4436"
+      },
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "route",
+          "tram"
+        ],
+        [
+          "==",
+          "type",
+          "path"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "round",
+        "line-join": "miter"
+      },
+      "paint": {
+        "line-color": "rgba(105, 105, 105, 1)",
+        "line-width": {
+          "stops": [
+            [
+              12,
+              1
+            ],
+            [
+              16,
+              2
+            ]
+          ]
+        },
+        "line-opacity": 1
+      },
+      "order": 214
+    },
+    {
+      "id": "public-transport-tram-line-white",
+      "type": "line",
+      "metadata": {
+        "mapbox:group": "1444849345966.4436"
+      },
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "route",
+          "tram"
+        ],
+        [
+          "==",
+          "type",
+          "path"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "butt",
+        "line-join": "miter"
+      },
+      "paint": {
+        "line-color": "rgba(0, 0, 0, 1)",
+        "line-width": {
+          "stops": [
+            [
+              14,
+              3
+            ],
+            [
+              16,
+              6
+            ]
+          ]
+        },
+        "line-opacity": 1,
+        "line-dasharray": [
+          0.2,
+          4
+        ]
+      },
+      "order": 215
+    },
+    {
+      "id": "public-transport-tram-number",
+      "type": "symbol",
+      "metadata": {
+        "mapbox:group": "1444849345966.4436"
+      },
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "route",
+          "tram"
+        ],
+        [
+          "==",
+          "type",
+          "line"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "text-field": "{ref}",
+        "text-size": 10,
+        "text-font": [
+          "Open Sans Bold"
+        ],
+        "text-anchor": "bottom",
+        "text-rotation-alignment": "auto",
+        "text-padding": 0,
+        "symbol-placement": "line",
+        "text-line-height": 1.6,
+        "text-allow-overlap": false,
+        "text-letter-spacing": 0.1
+      },
+      "paint": {
+        "text-color": "rgba(6, 6, 6, 1)",
+        "text-translate-anchor": "map",
+        "text-opacity": 1,
+        "icon-color": "rgba(51, 51, 51, 1)",
+        "icon-opacity": 1,
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1
+      },
+      "order": 216
+    },
+    {
+      "id": "public-transport-tram-station-point",
+      "type": "circle",
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "route",
+          "tram"
+        ],
+        [
+          "==",
+          "type",
+          "station"
+        ]
+      ],
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "circle-color": "rgba(105, 105, 105, 1)",
+        "circle-stroke-color": "rgba(255, 255, 255, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      },
+      "order": 217
+    },
+    {
+      "id": "public-transport-subway-line",
+      "type": "line",
+      "metadata": {
+        "mapbox:group": "1444849345966.4436"
+      },
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "route",
+          "subway"
+        ],
+        [
+          "==",
+          "type",
+          "path"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": {
+          "type": "identity",
+          "property": "colour"
+        },
+        "line-width": {
+          "stops": [
+            [
+              13,
+              2
+            ],
+            [
+              14,
+              3
+            ],
+            [
+              16,
+              6
+            ]
+          ]
+        },
+        "line-opacity": 1,
+        "line-blur": 0
+      },
+      "order": 218
+    },
+    {
+      "id": "public-transport-subway-number",
+      "type": "symbol",
+      "metadata": {
+        "mapbox:group": "1444849345966.4436"
+      },
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "route",
+          "subway"
+        ],
+        [
+          "==",
+          "type",
+          "line"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "text-field": "{ref}",
+        "text-size": 10,
+        "text-font": [
+          "Open Sans Bold"
+        ],
+        "text-anchor": "center",
+        "text-rotation-alignment": "auto",
+        "text-padding": 0,
+        "symbol-placement": "line",
+        "text-line-height": 1.6,
+        "text-allow-overlap": false,
+        "text-letter-spacing": 0.1
+      },
+      "paint": {
+        "text-color": {
+          "type": "identity",
+          "property": "colour"
+        },
+        "text-translate-anchor": "map",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1,
+        "text-opacity": 1,
+        "text-halo-blur": 0
+      },
+      "order": 219
+    },
+    {
+      "id": "public-transport-subway-station-point",
+      "type": "circle",
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "route",
+          "subway"
+        ],
+        [
+          "==",
+          "type",
+          "station"
+        ]
+      ],
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "circle-color": {
+          "type": "identity",
+          "property": "colour"
+        },
+        "circle-stroke-color": "rgba(255, 255, 255, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 4
+      },
+      "order": 220
+    },
+    {
+      "id": "public-transport-railway-station-name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "route",
+          "railway"
+        ],
+        [
+          "==",
+          "type",
+          "station"
+        ]
+      ],
+      "layout": {
+        "text-field": "{member_name}",
+        "symbol-placement": "point",
+        "text-font": [
+          "Open Sans Regular"
+        ],
+        "text-size": 12,
+        "text-anchor": "top",
+        "text-keep-upright": true,
+        "text-pitch-alignment": "auto",
+        "text-padding": 2,
+        "text-line-height": 1.2,
+        "icon-text-fit": "none",
+        "text-max-width": 6,
+        "text-justify": "center",
+        "text-offset": [
+          0,
+          0.5
+        ],
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "rgba(51, 51, 51, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1.2,
+        "text-halo-blur": 0
+      },
+      "order": 221
+    },
+    {
+      "id": "public-transport-bus-station-name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 15,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "route",
+          "bus"
+        ],
+        [
+          "==",
+          "type",
+          "station"
+        ]
+      ],
+      "layout": {
+        "text-field": "{member_name}",
+        "symbol-placement": "point",
+        "text-font": [
+          "Open Sans Regular"
+        ],
+        "text-size": 10,
+        "text-anchor": "top",
+        "text-keep-upright": true,
+        "text-pitch-alignment": "auto",
+        "text-padding": 2,
+        "text-line-height": 1.2,
+        "icon-text-fit": "none",
+        "text-max-width": 6,
+        "text-justify": "center",
+        "text-offset": [
+          0,
+          0.5
+        ],
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "rgba(85, 117, 224, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1.2,
+        "text-halo-blur": 0
+      },
+      "order": 222
+    },
+    {
+      "id": "public-transport-tram-station-name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 15,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "route",
+          "tram"
+        ],
+        [
+          "==",
+          "type",
+          "station"
+        ]
+      ],
+      "layout": {
+        "text-field": "{member_name}",
+        "symbol-placement": "point",
+        "text-font": [
+          "Open Sans Regular"
+        ],
+        "text-size": 10,
+        "text-anchor": "top",
+        "text-keep-upright": true,
+        "text-pitch-alignment": "auto",
+        "text-padding": 2,
+        "text-line-height": 1.2,
+        "icon-text-fit": "none",
+        "text-max-width": 6,
+        "text-justify": "center",
+        "text-offset": [
+          0,
+          0.5
+        ],
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "rgba(51, 51, 51, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1.2,
+        "text-halo-blur": 0
+      },
+      "order": 223
+    },
+    {
+      "id": "public-transport-subway-station-name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "public_transport",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "route",
+          "subway"
+        ],
+        [
+          "==",
+          "type",
+          "station"
+        ]
+      ],
+      "layout": {
+        "text-field": "{member_name}",
+        "symbol-placement": "point",
+        "text-font": [
+          "Open Sans Regular"
+        ],
+        "text-size": 12,
+        "text-anchor": "top",
+        "text-keep-upright": true,
+        "text-pitch-alignment": "auto",
+        "text-padding": 2,
+        "text-line-height": 1.2,
+        "icon-text-fit": "none",
+        "text-max-width": 6,
+        "text-justify": "center",
+        "text-offset": [
+          0,
+          0.5
+        ],
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": {
+          "type": "identity",
+          "property": "colour"
+        },
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1.2,
+        "text-halo-blur": 0
+      },
+      "order": 224
+    }
+  ]
+}
