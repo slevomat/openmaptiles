@@ -59,6 +59,7 @@ FROM (
             LEFT OUTER JOIN osm_route_member rm6 ON rm6.member = hl.osm_id AND rm6.concurrency_index=6
     WHERE (hl.name <> '' OR hl.ref <> '' OR rm1.ref <> '' OR rm1.network <> '')
       AND NULLIF(hl.highway, '') IS NOT NULL
+      AND rm.route = 'road'
 ) AS t;
 CREATE INDEX IF NOT EXISTS osm_transportation_name_network_osm_id_idx ON osm_transportation_name_network (osm_id);
 CREATE INDEX IF NOT EXISTS osm_transportation_name_network_name_ref_idx ON osm_transportation_name_network (coalesce(name, ''), coalesce(ref, ''));

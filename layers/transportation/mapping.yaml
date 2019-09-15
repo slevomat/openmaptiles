@@ -48,6 +48,16 @@ generalized_tables:
     sql_filter: (highway IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link') OR highway = 'construction' AND construction IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link')) AND NOT is_area AND ST_IsValid(geometry)
     tolerance: ZRES12
 
+# etldoc: imposm3 -> osm_route_member_gen2
+  route_member_gen2:
+    source: route_member_gen1
+    tolerance: ZRES12
+
+# etldoc: imposm3 -> osm_route_member_gen1
+  route_member_gen1:
+    source: route_member
+    tolerance: ZRES13
+
 name_field: &name
   name: name
   key: name
@@ -115,6 +125,14 @@ ref_field: &ref
 network_field: &network
   key: network
   name: network
+  type: string
+operator_field: &operator
+  key: operator
+  name: operator
+  type: string
+colour_field: &colour
+  key: colour
+  name: colour
   type: string
 layer_field: &layer
   key: layer
@@ -250,6 +268,8 @@ tables:
       type: string
     - *ref
     - *network
+    - *operator
+    - *colour
     - *z_order
     - *layer
     - *level
@@ -415,15 +435,33 @@ tables:
     columns:
     - name: osm_id
       type: id
+    - name: geometry
+      type: geometry
     - name: member
       type: member_id
+    - name: member_index
+      type: member_index
     - name: role
       type: member_role
     - name: type
       type: member_type
+    - name: member_name
+      key: name
+      type: string
+      from_member: true
+    - name: route
+      key: route
+      type: string
     - *ref
     - *network
     - *name
+    - *colour
     mapping:
       route:
       - road
+      - tram
+      - bus
+      - railway
+      - tracks
+      - train
+      - subway
