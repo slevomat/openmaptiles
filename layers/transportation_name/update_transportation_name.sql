@@ -48,6 +48,7 @@ FROM (
         rm.member = hl.osm_id
     WHERE (hl.name <> '' OR hl.ref <> '')
       AND NULLIF(hl.highway, '') IS NOT NULL
+      AND rm.route = 'road'
 ) AS t
 WHERE ("rank" = 1 OR "rank" IS NULL);
 CREATE INDEX IF NOT EXISTS osm_transportation_name_network_osm_id_idx ON osm_transportation_name_network (osm_id);
