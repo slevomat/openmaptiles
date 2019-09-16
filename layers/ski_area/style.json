@@ -1,0 +1,239 @@
+{
+  "layers": [
+    {
+      "id": "ski-area-downhill-easy-line",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "ski_area",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "downhill"
+        ],
+        [
+          "in",
+          "difficulty",
+          "novice",
+          "easy"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": "rgba(29, 50, 165, 1)",
+        "line-gap-width": 14,
+        "line-width": 1,
+        "line-blur": 0,
+        "line-offset": 0
+      },
+      "order": 227
+    },
+    {
+      "id": "ski-area-downhill-easy-fill",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "ski_area",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "downhill"
+        ],
+        [
+          "in",
+          "difficulty",
+          "novice",
+          "easy"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "butt",
+        "line-join": "miter"
+      },
+      "paint": {
+        "line-color": "rgba(191, 227, 253, 1)",
+        "line-gap-width": 0,
+        "line-width": 14,
+        "line-offset": 0,
+        "line-opacity": 1,
+        "line-blur": 0
+      },
+      "order": 228
+    },
+    {
+      "id": "ski-area-downhill-intermediate-line",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "ski_area",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "downhill"
+        ],
+        [
+          "in",
+          "difficulty",
+          "intermediate"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": "rgba(165, 29, 38, 1)",
+        "line-gap-width": 14,
+        "line-width": 1,
+        "line-blur": 0,
+        "line-offset": 0
+      },
+      "order": 229
+    },
+    {
+      "id": "ski-area-downhill-intermediate-fill",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "ski_area",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "downhill"
+        ],
+        [
+          "in",
+          "difficulty",
+          "intermediate"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "butt",
+        "line-join": "miter"
+      },
+      "paint": {
+        "line-color": "rgba(251, 189, 190, 1)",
+        "line-gap-width": 0,
+        "line-width": 14,
+        "line-offset": 0
+      },
+      "order": 230
+    },
+    {
+      "id": "ski-area-downhill-hard-line",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "ski_area",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "downhill"
+        ],
+        [
+          "in",
+          "difficulty",
+          "hard",
+          "expert",
+          "advanced",
+          "freeride",
+          "expert"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": "rgba(37, 37, 37, 1)",
+        "line-gap-width": 14,
+        "line-width": 1,
+        "line-blur": 0,
+        "line-offset": 0
+      },
+      "order": 231
+    },
+    {
+      "id": "ski-area-downhill-hard-fill",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "ski_area",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "downhill"
+        ],
+        [
+          "in",
+          "difficulty",
+          "hard",
+          "expert",
+          "advanced",
+          "freeride",
+          "expert"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "butt",
+        "line-join": "miter"
+      },
+      "paint": {
+        "line-color": "rgba(146, 146, 146, 1)",
+        "line-gap-width": 0,
+        "line-width": 14,
+        "line-offset": 0,
+        "line-opacity": 1
+      },
+      "order": 232
+    },
+    {
+      "id": "ski-area-downhill-name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "ski_area",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "downhill"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-size": 12,
+        "text-font": [
+          "Open Sans Regular"
+        ],
+        "text-anchor": "center",
+        "visibility": "none"
+      },
+      "paint": {
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1,
+        "text-halo-blur": 0
+      },
+      "order": 233
+    }
+  ]
+}
