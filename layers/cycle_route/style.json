@@ -1,0 +1,371 @@
+{
+  "layers": [
+    {
+      "id": "cycle-route-international-line",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "cycle_route",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "path"
+        ],
+        [
+          "==",
+          "network",
+          "icn"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(167, 16, 231, 1)",
+        "line-width": {
+          "stops": [
+            [
+              10,
+              1
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              4
+            ]
+          ]
+        },
+        "line-opacity": 1
+      },
+      "order": 234
+    },
+    {
+      "id": "cycle-route-international-line-name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "cycle_route",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "path"
+        ],
+        [
+          "==",
+          "network",
+          "icn"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "symbol-placement": "line",
+        "text-field": "{ref} {relation_name}",
+        "text-size": {
+          "stops": [
+            [
+              12,
+              10
+            ],
+            [
+              14,
+              11
+            ]
+          ]
+        },
+        "text-font": [
+          "Open Sans Regular"
+        ]
+      },
+      "paint": {
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-color": "rgba(167, 16, 231, 1)",
+        "text-halo-width": 1.2
+      },
+      "order": 235
+    },
+    {
+      "id": "cycle-route-regional-line",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "cycle_route",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "path"
+        ],
+        [
+          "==",
+          "network",
+          "rcn"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(167, 16, 231, 1)",
+        "line-width": {
+          "stops": [
+            [
+              10,
+              1
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              4
+            ]
+          ]
+        },
+        "line-opacity": 1
+      },
+      "order": 236
+    },
+    {
+      "id": "cycle-route-regional-line-name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "cycle_route",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "path"
+        ],
+        [
+          "==",
+          "network",
+          "rcn"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "symbol-placement": "line",
+        "text-field": "{ref} {relation_name}",
+        "text-size": {
+          "stops": [
+            [
+              12,
+              10
+            ],
+            [
+              14,
+              11
+            ]
+          ]
+        },
+        "text-font": [
+          "Open Sans Regular"
+        ]
+      },
+      "paint": {
+        "text-color": "rgba(167, 16, 231, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1.2
+      },
+      "order": 237
+    },
+    {
+      "id": "cycle-route-national-line",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "cycle_route",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "path"
+        ],
+        [
+          "==",
+          "network",
+          "ncn"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "round",
+        "line-join": "miter"
+      },
+      "paint": {
+        "line-color": "rgba(231, 76, 16, 1)",
+        "line-width": {
+          "stops": [
+            [
+              10,
+              1
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              4
+            ]
+          ]
+        },
+        "line-opacity": 1,
+        "line-blur": 0,
+        "line-gap-width": 0
+      },
+      "order": 238
+    },
+    {
+      "id": "cycle-route-national-line-name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "cycle_route",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "path"
+        ],
+        [
+          "==",
+          "network",
+          "ncn"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "symbol-placement": "line",
+        "text-field": "{ref} {relation_name}",
+        "text-size": {
+          "stops": [
+            [
+              12,
+              10
+            ],
+            [
+              14,
+              11
+            ]
+          ]
+        },
+        "text-font": [
+          "Open Sans Regular"
+        ]
+      },
+      "paint": {
+        "text-color": "rgba(231, 76, 16, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1.2
+      },
+      "order": 239
+    },
+    {
+      "id": "cycle-route-local-line",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "cycle_route",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "path"
+        ],
+        [
+          "==",
+          "network",
+          "lcn"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(28, 29, 185, 1)",
+        "line-width": {
+          "stops": [
+            [
+              10,
+              1
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              4
+            ]
+          ]
+        },
+        "line-opacity": 1
+      },
+      "order": 240
+    },
+    {
+      "id": "cycle-route-local-line-name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "cycle_route",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "type",
+          "path"
+        ],
+        [
+          "==",
+          "network",
+          "lcn"
+        ]
+      ],
+      "layout": {
+        "visibility": "none",
+        "symbol-placement": "line",
+        "text-field": "{ref} {relation_name}",
+        "text-size": {
+          "stops": [
+            [
+              12,
+              10
+            ],
+            [
+              14,
+              11
+            ]
+          ]
+        },
+        "text-font": [
+          "Open Sans Regular"
+        ]
+      },
+      "paint": {
+        "text-color": "rgba(28, 29, 185, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1.2
+      },
+      "order": 241
+    }
+  ]
+}
