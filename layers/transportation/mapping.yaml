@@ -537,6 +537,7 @@ tables:
       route:
       - road
       - hiking
+      - foot
       - tram
       - bus
       - railway
