@@ -439,6 +439,9 @@ tables:
     - *network
     - *name
     - *colour
+    - name: symbol
+      key: osmc:symbol
+      type: string
     mapping:
       route:
       - road
@@ -448,4 +451,5 @@ tables:
       - tracks
       - train
       - subway
+      - hiking
       - bicycle
