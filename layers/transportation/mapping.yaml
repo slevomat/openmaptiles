@@ -490,4 +490,5 @@ tables:
       - train
       - subway
       - hiking
+      - foot
       - bicycle
