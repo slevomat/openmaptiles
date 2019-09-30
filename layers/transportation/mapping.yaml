@@ -236,6 +236,9 @@ tables:
       key: tracktype
       type: string
     - *ref
+    - name: int_ref
+      key: int_ref
+      type: string
     - *network
     - *z_order
     - *layer
