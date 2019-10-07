@@ -122,6 +122,13 @@ services:
     - "8090:8080"
     volumes:
      - ./build/openmaptiles.tm2source:/mapping
+  export-tiles:
+    image: tilecopy
+    build:
+      context: ./
+      dockerfile: ./tilecopy/Dockerfile
+    volumes:
+      - ./data:/data
 
 networks:
   postgres_conn:
