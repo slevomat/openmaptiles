@@ -88,7 +88,7 @@ FROM (
     SELECT DISTINCT ON (hl.osm_id)
         hl.geometry,
         hl.osm_id,
-        transportation_name_tags(hl.geometry, hl.tags, hl.name, hl.name_en, hl.name_de) AS tags,
+        transportation_name_tags(hl.geometry, hl.tags, hl.name, hl.name_en) AS tags,
         rm1.network_type,
         CASE
             WHEN rm1.network_type IS NOT NULL AND rm1.ref::text <> ''
