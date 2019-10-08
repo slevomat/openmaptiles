@@ -12,7 +12,6 @@ SELECT
     osm_id,
     name,
     name_en,
-    name_de,
     tags,
     ref,
     highway,
@@ -29,7 +28,6 @@ FROM (
         hl.osm_id,
         CASE WHEN length(hl.name) > 15 THEN osml10n_street_abbrev_all(hl.name) ELSE NULLIF(hl.name, '') END AS "name",
         CASE WHEN length(hl.name_en) > 15 THEN osml10n_street_abbrev_en(hl.name_en) ELSE NULLIF(hl.name_en, '') END AS "name_en",
-        CASE WHEN length(hl.name_de) > 15 THEN osml10n_street_abbrev_de(hl.name_de) ELSE NULLIF(hl.name_de, '') END AS "name_de",
         slice_language_tags(hl.tags) AS tags,
         rm1.network_type,
         CASE
@@ -72,7 +70,6 @@ CREATE TABLE IF NOT EXISTS osm_transportation_name_linestring AS
 SELECT (ST_Dump(geometry)).geom AS geometry,
        name,
        name_en,
-       name_de,
        tags || get_basic_names(tags, geometry) AS "tags",
        ref,
        highway,
@@ -88,9 +85,8 @@ FROM (
          SELECT ST_LineMerge(ST_Collect(geometry)) AS geometry,
                 name,
                 name_en,
-                name_de,
                 tags || hstore( -- store results of osml10n_street_abbrev_* above
-                               ARRAY ['name', name, 'name:en', name_en, 'name:de', name_de]) AS tags,
+                               ARRAY ['name', name, 'name:en', name_en]) AS tags,
                 ref,
                 highway,
                 subclass,
@@ -105,15 +101,14 @@ FROM (
                 min(z_order) AS z_order
          FROM osm_transportation_name_network
          WHERE name <> '' OR ref <> ''
-         GROUP BY name, name_en, name_de, tags, ref, highway, subclass, "level", layer, indoor, network_type,
+         GROUP BY name, name_en, tags, ref, highway, subclass, "level", layer, indoor, network_type,
                   route_1, route_2, route_3, route_4, route_5, route_6
          UNION ALL
 
          SELECT ST_LineMerge(ST_Collect(geometry)) AS geometry,
                 CASE WHEN length(name) > 15 THEN osml10n_street_abbrev_all(name) ELSE NULLIF(name, '') END AS "name",
                 CASE WHEN length(name_en) > 15 THEN osml10n_street_abbrev_en(name_en) ELSE NULLIF(name_en, '') END AS "name_en",
-                CASE WHEN length(name_de) > 15 THEN osml10n_street_abbrev_de(name_de) ELSE NULLIF(name_de, '') END AS "name_de",
-                slice_language_tags(tags) || hstore(ARRAY ['name', name, 'name:en', name_en, 'name:de', name_de]) AS tags,
+                slice_language_tags(tags) || hstore(ARRAY ['name', name, 'name:en', name_en]) AS tags,
                 NULL AS ref,
                 'shipway' AS highway,
                 shipway AS subclass,
@@ -131,7 +126,7 @@ FROM (
                 min(z_order) AS z_order
          FROM osm_shipway_linestring
          WHERE name <> ''
-         GROUP BY name, name_en, name_de, tags, subclass, "level", layer
+         GROUP BY name, name_en, tags, subclass, "level", layer
      ) AS highway_union
 ;
 CREATE INDEX IF NOT EXISTS osm_transportation_name_linestring_name_ref_idx ON osm_transportation_name_linestring (coalesce(name, ''), coalesce(ref, ''));
@@ -146,7 +141,6 @@ CREATE OR REPLACE VIEW osm_transportation_name_linestring_gen1_view AS
 SELECT ST_Simplify(geometry, 50) AS geometry,
        name,
        name_en,
-       name_de,
        tags,
        ref,
        highway,
@@ -174,7 +168,6 @@ CREATE OR REPLACE VIEW osm_transportation_name_linestring_gen2_view AS
 SELECT ST_Simplify(geometry, 120) AS geometry,
        name,
        name_en,
-       name_de,
        tags,
        ref,
        highway,
@@ -202,7 +195,6 @@ CREATE OR REPLACE VIEW osm_transportation_name_linestring_gen3_view AS
 SELECT ST_Simplify(geometry, 200) AS geometry,
        name,
        name_en,
-       name_de,
        tags,
        ref,
        highway,
@@ -230,7 +222,6 @@ CREATE OR REPLACE VIEW osm_transportation_name_linestring_gen4_view AS
 SELECT ST_Simplify(geometry, 500) AS geometry,
        name,
        name_en,
-       name_de,
        tags,
        ref,
        highway,
@@ -318,7 +309,6 @@ BEGIN
         osm_id,
         name,
         name_en,
-        name_de,
         tags,
         ref,
         highway,
@@ -335,7 +325,6 @@ BEGIN
             hl.osm_id,
             CASE WHEN length(hl.name) > 15 THEN osml10n_street_abbrev_all(hl.name) ELSE NULLIF(hl.name, '') END AS name,
             CASE WHEN length(hl.name_en) > 15 THEN osml10n_street_abbrev_en(hl.name_en) ELSE NULLIF(hl.name_en, '') END AS name_en,
-            CASE WHEN length(hl.name_de) > 15 THEN osml10n_street_abbrev_de(hl.name_de) ELSE NULLIF(hl.name_de, '') END AS name_de,
             slice_language_tags(hl.tags) AS tags,
             rm.network_type,
             CASE
@@ -404,7 +393,6 @@ CREATE TABLE IF NOT EXISTS transportation_name.name_changes
     osm_id bigint,
     name character varying,
     name_en character varying,
-    name_de character varying,
     ref character varying,
     highway character varying,
     subclass character varying,
@@ -426,19 +414,19 @@ $$
 BEGIN
     IF (tg_op IN ('DELETE', 'UPDATE'))
     THEN
-        INSERT INTO transportation_name.name_changes(is_old, osm_id, name, name_en, name_de, ref, highway, subclass,
+        INSERT INTO transportation_name.name_changes(is_old, osm_id, name, name_en, ref, highway, subclass,
                                                      brunnel, level, layer, indoor, network_type,
                                                      route_1, route_2, route_3, route_4, route_5, route_6)
-        VALUES (TRUE, old.osm_id, old.name, old.name_en, old.name_de, old.tags, old.highway, old.subclass,
+        VALUES (TRUE, old.osm_id, old.name, old.name_en, old.tags, old.highway, old.subclass,
                 old.brunnel, old.level, old.layer, old.indoor, old.network_type,
                 old.route_1, old.route_2, old.route_3, old.route_4, old.route_5, old.route_6);
     END IF;
     IF (tg_op IN ('UPDATE', 'INSERT'))
     THEN
-        INSERT INTO transportation_name.name_changes(is_old, osm_id, name, name_en, name_de, ref, highway, subclass,
+        INSERT INTO transportation_name.name_changes(is_old, osm_id, name, name_en, ref, highway, subclass,
                                                      brunnel, level, layer, indoor, network_type,
                                                      route_1, route_2, route_3, route_4, route_5, route_6)
-        VALUES (FALSE, new.osm_id, new.name, new.name_en, new.name_de, new.ref, new.highway, new.subclass,
+        VALUES (FALSE, new.osm_id, new.name, new.name_en, new.ref, new.highway, new.subclass,
                 new.brunnel, new.level, new.layer, new.indoor, new.network_type,
                 new.route_1, new.route_2, new.route_3, new.route_4, new.route_5, new.route_6);
     END IF;
@@ -471,11 +459,10 @@ BEGIN
 
     -- Compact the change history to keep only the first and last version, and then uniq version of row
     CREATE TEMP TABLE name_changes_compact AS
-    SELECT DISTINCT ON (name, name_en, name_de, ref, highway, subclass, brunnel, level, layer, indoor, network_type,
+    SELECT DISTINCT ON (name, name_en, ref, highway, subclass, brunnel, level, layer, indoor, network_type,
                         route_1, route_2, route_3, route_4, route_5, route_6)
         name,
         name_en,
-        name_de,
         ref,
         highway,
         subclass,
@@ -508,7 +495,6 @@ BEGIN
     WHERE coalesce(n.name, '') = coalesce(c.name, '')
       AND coalesce(n.ref, '') = coalesce(c.ref, '')
       AND n.name_en IS NOT DISTINCT FROM c.name_en
-      AND n.name_de IS NOT DISTINCT FROM c.name_de
       AND n.highway IS NOT DISTINCT FROM c.highway
       AND n.subclass IS NOT DISTINCT FROM c.subclass
       AND n.brunnel IS NOT DISTINCT FROM c.brunnel
@@ -527,7 +513,6 @@ BEGIN
     SELECT (ST_Dump(geometry)).geom AS geometry,
            name,
            name_en,
-           name_de,
            tags || get_basic_names(tags, geometry) AS tags,
            ref,
            highway,
@@ -543,9 +528,8 @@ BEGIN
         SELECT ST_LineMerge(ST_Collect(n.geometry)) AS geometry,
             n.name,
             n.name_en,
-            n.name_de,
             hstore(string_agg(nullif(slice_language_tags(tags ||
-                                                         hstore(ARRAY ['name', n.name, 'name:en', n.name_en, 'name:de', n.name_de]))::text,
+                                                         hstore(ARRAY ['name', n.name, 'name:en', n.name_en]))::text,
                                      ''), ',')) AS tags,
             n.ref,
             n.highway,
@@ -562,7 +546,6 @@ BEGIN
                  coalesce(n.name, '') = coalesce(c.name, '')
              AND coalesce(n.ref, '') = coalesce(c.ref, '')
              AND n.name_en IS NOT DISTINCT FROM c.name_en
-             AND n.name_de IS NOT DISTINCT FROM c.name_de
              AND n.highway IS NOT DISTINCT FROM c.highway
              AND n.subclass IS NOT DISTINCT FROM c.subclass
              AND n.brunnel IS NOT DISTINCT FROM c.brunnel
@@ -576,7 +559,7 @@ BEGIN
              AND n.route_4 IS NOT DISTINCT FROM c.route_4
              AND n.route_5 IS NOT DISTINCT FROM c.route_5
              AND n.route_6 IS NOT DISTINCT FROM c.route_6
-        GROUP BY n.name, n.name_en, n.name_de, n.ref, n.highway, n.subclass, n.brunnel, n.level, n.layer, n.indoor, n.network_type,
+        GROUP BY n.name, n.name_en, n.ref, n.highway, n.subclass, n.brunnel, n.level, n.layer, n.indoor, n.network_type,
                  n.route_1, n.route_2, n.route_3, n.route_4, n.route_5, n.route_6
     ) AS highway_union;
 
@@ -587,7 +570,6 @@ BEGIN
         coalesce(n.name, n.ref) = c.name_ref
         AND n.name IS NOT DISTINCT FROM c.name
         AND n.name_en IS NOT DISTINCT FROM c.name_en
-        AND n.name_de IS NOT DISTINCT FROM c.name_de
         AND n.ref IS NOT DISTINCT FROM c.ref
         AND n.highway IS NOT DISTINCT FROM c.highway
         AND n.subclass IS NOT DISTINCT FROM c.subclass
@@ -607,7 +589,6 @@ BEGIN
             coalesce(n.name, n.ref) = c.name_ref
             AND n.name IS NOT DISTINCT FROM c.name
             AND n.name_en IS NOT DISTINCT FROM c.name_en
-            AND n.name_de IS NOT DISTINCT FROM c.name_de
             AND n.ref IS NOT DISTINCT FROM c.ref
             AND n.highway IS NOT DISTINCT FROM c.highway
             AND n.subclass IS NOT DISTINCT FROM c.subclass
@@ -627,7 +608,6 @@ BEGIN
         coalesce(n.name, n.ref) = c.name_ref
         AND n.name IS NOT DISTINCT FROM c.name
         AND n.name_en IS NOT DISTINCT FROM c.name_en
-        AND n.name_de IS NOT DISTINCT FROM c.name_de
         AND n.ref IS NOT DISTINCT FROM c.ref
         AND n.highway IS NOT DISTINCT FROM c.highway
         AND n.subclass IS NOT DISTINCT FROM c.subclass
@@ -647,7 +627,6 @@ BEGIN
             coalesce(n.name, n.ref) = c.name_ref
             AND n.name IS NOT DISTINCT FROM c.name
             AND n.name_en IS NOT DISTINCT FROM c.name_en
-            AND n.name_de IS NOT DISTINCT FROM c.name_de
             AND n.ref IS NOT DISTINCT FROM c.ref
             AND n.highway IS NOT DISTINCT FROM c.highway
             AND n.subclass IS NOT DISTINCT FROM c.subclass
@@ -667,7 +646,6 @@ BEGIN
         coalesce(n.name, n.ref) = c.name_ref
         AND n.name IS NOT DISTINCT FROM c.name
         AND n.name_en IS NOT DISTINCT FROM c.name_en
-        AND n.name_de IS NOT DISTINCT FROM c.name_de
         AND n.ref IS NOT DISTINCT FROM c.ref
         AND n.highway IS NOT DISTINCT FROM c.highway
         AND n.subclass IS NOT DISTINCT FROM c.subclass
@@ -687,7 +665,6 @@ BEGIN
             coalesce(n.name, n.ref) = c.name_ref
             AND n.name IS NOT DISTINCT FROM c.name
             AND n.name_en IS NOT DISTINCT FROM c.name_en
-            AND n.name_de IS NOT DISTINCT FROM c.name_de
             AND n.ref IS NOT DISTINCT FROM c.ref
             AND n.highway IS NOT DISTINCT FROM c.highway
             AND n.subclass IS NOT DISTINCT FROM c.subclass
@@ -707,7 +684,6 @@ BEGIN
         coalesce(n.name, n.ref) = c.name_ref
         AND n.name IS NOT DISTINCT FROM c.name
         AND n.name_en IS NOT DISTINCT FROM c.name_en
-        AND n.name_de IS NOT DISTINCT FROM c.name_de
         AND n.ref IS NOT DISTINCT FROM c.ref
         AND n.highway IS NOT DISTINCT FROM c.highway
         AND n.subclass IS NOT DISTINCT FROM c.subclass
@@ -727,7 +703,6 @@ BEGIN
             coalesce(n.name, n.ref) = c.name_ref
             AND n.name IS NOT DISTINCT FROM c.name
             AND n.name_en IS NOT DISTINCT FROM c.name_en
-            AND n.name_de IS NOT DISTINCT FROM c.name_de
             AND n.ref IS NOT DISTINCT FROM c.ref
             AND n.highway IS NOT DISTINCT FROM c.highway
             AND n.subclass IS NOT DISTINCT FROM c.subclass
