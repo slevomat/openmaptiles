@@ -29,7 +29,7 @@ FROM (
     SELECT DISTINCT ON (hl.osm_id)
         hl.geometry,
         hl.osm_id,
-        transportation_name_tags(hl.geometry, hl.tags, hl.name, hl.name_en, hl.name_de) AS tags,
+        transportation_name_tags(hl.geometry, hl.tags, hl.name, hl.name_en) AS tags,
         rm1.network_type,
         CASE
             WHEN rm1.network_type IS NOT NULL AND rm1.ref::text <> ''
@@ -151,7 +151,7 @@ SELECT ST_Simplify(geometry, ZRes(11)) AS geometry,
        toll,
        layer
 FROM osm_transportation_merge_linestring_gen_z10
-     -- Current view: motorway/primary/secondary, with _link variants and construction 
+     -- Current view: motorway/primary/secondary, with _link variants and construction
     ) /* DELAY_MATERIALIZED_VIEW_CREATION */;
 CREATE INDEX IF NOT EXISTS osm_transportation_merge_linestring_gen_z9_geometry_idx
     ON osm_transportation_merge_linestring_gen_z9 USING gist (geometry);
