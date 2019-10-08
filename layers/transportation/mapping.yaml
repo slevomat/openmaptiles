@@ -72,10 +72,6 @@ name_en_field: &name_en
   name: name_en
   key: name:en
   type: string
-name_de_field: &name_de
-  name: name_de
-  key: name:de
-  type: string
 short_name_field: &short_name
   key: short_name
   name: short_name
@@ -196,7 +192,6 @@ tables:
     - *indoor
     - *name
     - *name_en
-    - *name_de
     - name: tags
       type: hstore_tags
     - *short_name
@@ -269,7 +264,6 @@ tables:
     - *indoor
     - *name
     - *name_en
-    - *name_de
     - name: tags
       type: hstore_tags
     - *short_name
@@ -308,7 +302,6 @@ tables:
     - *layer
     - *name
     - *name_en
-    - *name_de
     - name: tags
       type: hstore_tags
     - *short_name
@@ -341,7 +334,6 @@ tables:
     - *layer
     - *name
     - *name_en
-    - *name_de
     - name: tags
       type: hstore_tags
     - *short_name
@@ -372,7 +364,6 @@ tables:
     - *layer
     - *name
     - *name_en
-    - *name_de
     - name: tags
       type: hstore_tags
     - *short_name
@@ -405,7 +396,6 @@ tables:
     - *layer
     - *name
     - *name_en
-    - *name_de
     - name: tags
       type: hstore_tags
     - *short_name
