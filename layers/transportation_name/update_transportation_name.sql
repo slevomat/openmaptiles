@@ -170,7 +170,7 @@ FROM (
                 array_agg(osm_id) AS source_ids,
                 1 AS source,
                 transportation_name_tags(
-                    NULL::geometry, tags, name, name_en, name_de
+                    NULL::geometry, tags, name, name_en
                 ) AS tags,
                 NULL AS ref,
                 'shipway' AS highway,
@@ -195,7 +195,7 @@ FROM (
                     -- to 1. https://postgis.net/docs/ST_ClusterDBSCAN.html
                     ST_ClusterDBSCAN(geometry, 0, 1) OVER (
                         PARTITION BY transportation_name_tags(
-                            NULL::geometry, tags, name, name_en, name_de
+                            NULL::geometry, tags, name, name_en
                         ), shipway, layer
                     ) AS cluster,
                     -- ST_ClusterDBSCAN returns an increasing integer as the cluster-ids within each partition
@@ -204,14 +204,14 @@ FROM (
                     -- partition columns.
                     DENSE_RANK() OVER (
                         ORDER BY transportation_name_tags(
-                            NULL::geometry, tags, name, name_en, name_de
+                            NULL::geometry, tags, name, name_en
                         ), shipway, layer
                     ) as cluster_group
              FROM osm_shipway_linestring
              WHERE name <> ''
          ) q
          GROUP BY cluster_group, cluster, transportation_name_tags(
-             NULL::geometry, tags, name, name_en, name_de
+             NULL::geometry, tags, name, name_en
          ), shipway, layer
          UNION ALL
 
@@ -228,7 +228,7 @@ FROM (
                 array_agg(osm_id) AS source_ids,
                 2 AS source,
                 transportation_name_tags(
-                    NULL::geometry, tags, name, name_en, name_de
+                    NULL::geometry, tags, name, name_en
                 ) AS tags,
                 NULL AS ref,
                 'aerialway' AS highway,
@@ -253,7 +253,7 @@ FROM (
                     -- to 1. https://postgis.net/docs/ST_ClusterDBSCAN.html
                     ST_ClusterDBSCAN(geometry, 0, 1) OVER (
                         PARTITION BY transportation_name_tags(
-                            NULL::geometry, tags, name, name_en, name_de
+                            NULL::geometry, tags, name, name_en
                         ), aerialway, layer
                     ) AS cluster,
                     -- ST_ClusterDBSCAN returns an increasing integer as the cluster-ids within each partition
@@ -262,14 +262,14 @@ FROM (
                     -- partition columns.
                     DENSE_RANK() OVER (
                         ORDER BY transportation_name_tags(
-                            NULL::geometry, tags, name, name_en, name_de
+                            NULL::geometry, tags, name, name_en
                         ), aerialway, layer
                     ) as cluster_group
              FROM osm_aerialway_linestring
              WHERE name <> ''
          ) q
          GROUP BY cluster_group, cluster, transportation_name_tags(
-             NULL::geometry, tags, name, name_en, name_de
+             NULL::geometry, tags, name, name_en
          ), aerialway, layer
      ) AS highway_union;
 
@@ -762,7 +762,7 @@ BEGIN
     FROM (
         SELECT hl.geometry,
             hl.osm_id,
-            transportation_name_tags(hl.geometry, hl.tags, hl.name, hl.name_en, hl.name_de) AS tags,
+            transportation_name_tags(hl.geometry, hl.tags, hl.name, hl.name_en) AS tags,
             rm1.network_type,
             CASE
                 WHEN rm1.network_type IS NOT NULL AND rm1.ref::text <> ''
@@ -1229,7 +1229,7 @@ BEGIN
     -- Add all Source-LineStrings affected by this update
     SELECT osm_id, NULL::INTEGER AS id, NULL::BIGINT[] AS source_ids, geometry,
            transportation_name_tags(
-               NULL::geometry, tags, name, name_en, name_de
+               NULL::geometry, tags, name, name_en
            ) AS tags, shipway AS subclass, layer, z_order
     FROM (
         -- Get Source-LineString-IDs of deleted or updated elements
@@ -1407,7 +1407,7 @@ BEGIN
     -- Add all Source-LineStrings affected by this update
     SELECT osm_id, NULL::INTEGER AS id, NULL::BIGINT[] AS source_ids, geometry,
            transportation_name_tags(
-               NULL::geometry, tags, name, name_en, name_de
+               NULL::geometry, tags, name, name_en
            ) AS tags, aerialway AS subclass, layer, z_order
     FROM (
         -- Get Source-LineString-IDs of deleted or updated elements

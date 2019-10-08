@@ -7,7 +7,6 @@ layer:
   fields:
     name: The OSM [`name`](http://wiki.openstreetmap.org/wiki/Key:name) value of the aerodrome. Language-specific values are in `name:xx`.
     name_en: English name `name:en` if available, otherwise `name`. This is deprecated and will be removed in a future release in favor of `name:en`.
-    name_de: German name `name:de` if available, otherwise `name` or `name:en`. This is deprecated and will be removed in a future release in favor of `name:de`.
     class:
       description: |
           Distinguish between more and less important aerodromes.
@@ -41,7 +40,7 @@ layer:
     key_field: id
     key_field_as_attribute: no
     srid: 900913
-    query: (SELECT id, geometry, name, name_en, name_de, {name_languages}, class, iata, icao, ele, ele_ft FROM layer_aerodrome_label(!bbox!, z(!scale_denominator!))) AS t
+    query: (SELECT id, geometry, name, name_en, {name_languages}, class, iata, icao, ele, ele_ft FROM layer_aerodrome_label(!bbox!, z(!scale_denominator!))) AS t
 schema:
   - ./update_aerodrome_label_point.sql
   - ./aerodrome_label.sql
