@@ -325,9 +325,9 @@ BEGIN
 		LEFT OUTER JOIN osm_route_member rm4 ON rm4.member = hl.osm_id AND rm4.concurrency_index=4
 		LEFT OUTER JOIN osm_route_member rm5 ON rm5.member = hl.osm_id AND rm5.concurrency_index=5
 		LEFT OUTER JOIN osm_route_member rm6 ON rm6.member = hl.osm_id AND rm6.concurrency_index=6
-	WHERE (hl.name <> '' OR hl.ref <> '' OR rm1.ref <> '' OR rm1.network <> '')
+	WHERE (hl.name <> '' OR hl.ref <> '' OR rm1.ref <> '' OR rm1.network <> '' OR rm1.ref IS NOT NULL)
           AND hl.highway <> ''
-          AND rm.route = 'road'
+          AND hl.public_transport != 'platform'
     ) AS t
     ON CONFLICT DO NOTHING;
 
