@@ -55,9 +55,9 @@ FROM (
             LEFT OUTER JOIN osm_route_member rm4 ON rm4.member = hl.osm_id AND rm4.concurrency_index=4
             LEFT OUTER JOIN osm_route_member rm5 ON rm5.member = hl.osm_id AND rm5.concurrency_index=5
             LEFT OUTER JOIN osm_route_member rm6 ON rm6.member = hl.osm_id AND rm6.concurrency_index=6
-    WHERE (hl.name <> '' OR hl.ref <> '' OR rm1.ref <> '' OR rm1.network <> '')
-      AND NULLIF(hl.highway, '') IS NOT NULL
-      AND rm.route = 'road'
+    WHERE (hl.name <> '' OR hl.ref <> '' OR rm1.ref <> '' OR rm1.network <> '' OR rm1.ref IS NOT NULL)
+      AND hl.highway <> ''
+      AND hl.public_transport != 'platform'
 ) AS t;
 CREATE INDEX IF NOT EXISTS osm_transportation_name_network_osm_id_idx ON osm_transportation_name_network (osm_id);
 CREATE INDEX IF NOT EXISTS osm_transportation_name_network_name_ref_idx ON osm_transportation_name_network (coalesce(name, ''), coalesce(ref, ''));
@@ -344,8 +344,9 @@ BEGIN
                 JOIN transportation_name.network_changes AS c ON
             hl.osm_id = c.osm_id
                 LEFT OUTER JOIN osm_route_member rm ON rm.member = hl.osm_id AND rm.concurrency_index=1
-        WHERE (hl.name <> '' OR hl.ref <> '')
-          AND NULLIF(hl.highway, '') IS NOT NULL
+        WHERE (hl.name <> '' OR hl.ref <> '' OR rm.ref IS NOT NULL)
+            AND hl.highway <> ''
+            AND hl.public_transport != 'platform'
     ) AS t;
 
     -- noinspection SqlWithoutWhere
