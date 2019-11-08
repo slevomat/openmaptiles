@@ -47,9 +47,9 @@ SELECT NULL::bigint AS osm_id, geometry, 'ice_shelf'::text AS subclass
 FROM ne_10m_antarctic_ice_shelves_polys
     );
 
-CREATE OR REPLACE VIEW landcover_z7 AS
+CREATE OR REPLACE VIEW landcover_z6 AS
 (
--- etldoc: osm_landcover_polygon_gen7 ->  landcover_z7
+-- etldoc: osm_landcover_polygon_gen7 ->  landcover_z6
 SELECT osm_id, geometry, subclass
 FROM osm_landcover_polygon_gen7
     );
@@ -132,16 +132,16 @@ FROM (
          WHERE zoom_level BETWEEN 2 AND 4
            AND geometry && bbox
          UNION ALL
-         -- etldoc:  landcover_z5 -> layer_landcover:z5_6
+         -- etldoc:  landcover_z5 -> layer_landcover:z5
          SELECT *
          FROM landcover_z5
-         WHERE zoom_level BETWEEN 5 AND 6
+         WHERE zoom_level = 5
            AND geometry && bbox
          UNION ALL
-         -- etldoc:  landcover_z7 -> layer_landcover:z7
+         -- etldoc:  landcover_z6 -> layer_landcover:z6_7
          SELECT *
-         FROM landcover_z7
-         WHERE zoom_level = 7
+         FROM landcover_z6
+         WHERE zoom_level BETWEEN 6 AND 7
            AND geometry && bbox
          UNION ALL
          -- etldoc:  landcover_z8 -> layer_landcover:z8
