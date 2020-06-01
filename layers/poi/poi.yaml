@@ -45,11 +45,15 @@ layer:
           subclass: ['park', 'bbq']
         bus:
           subclass: ['bus_stop', 'bus_station']
+        tram:
+          subclass: 'tram_stop'
+        subway:
+          subclass: 'subway'
         railway:
           - __AND__:
               subclass: 'station'
               mapping_key: 'railway'
-          - subclass: ['halt', 'tram_stop', 'subway']
+          - subclass: 'halt'
         aerialway:
           __AND__:
             subclass: 'station'
