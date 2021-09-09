@@ -316,7 +316,7 @@ FROM (
          SELECT geometry, 
                 subclass
          FROM osm_landcover_gen_z7
-         WHERE zoom_level = 7
+         WHERE zoom_level IN (6, 7)
            AND geometry && bbox
          UNION ALL
          -- etldoc:  osm_landcover_gen_z8 -> layer_landcover:z8
