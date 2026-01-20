@@ -27,13 +27,13 @@ STYLE_HEADER_FILE := style/style-header.json
 
 # Support newer `docker compose` syntax in addition to `docker-compose`
 
-DOCKER := docker
+DOCKER := sudo docker
 
 ifeq (, $(shell which docker-compose))
-  DOCKER_COMPOSE_COMMAND := docker compose
+  DOCKER_COMPOSE_COMMAND := sudo docker compose
   $(info Using docker compose V2 (docker compose))
 else
-  DOCKER_COMPOSE_COMMAND := docker-compose
+  DOCKER_COMPOSE_COMMAND := sudo docker-compose
   $(info Using docker compose V1 (docker-compose))
 endif
 
