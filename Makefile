@@ -341,6 +341,8 @@ start-db-nowait: init-dirs
 start-db: start-db-nowait
 	@echo "Wait for PostgreSQL to start..."
 	$(DOCKER_COMPOSE) run $(DC_OPTS) openmaptiles-tools pgwait
+	sudo /usr/bin/setfacl -R -d -m u:slevomat:rwx /data
+	sudo /usr/bin/setfacl -R -m u:slevomat:rwx /data
 
 # Wrap start-db target but use the preloaded image
 .PHONY: start-db-preloaded
