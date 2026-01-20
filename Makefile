@@ -27,6 +27,8 @@ STYLE_HEADER_FILE := style/style-header.json
 
 # Support newer `docker compose` syntax in addition to `docker-compose`
 
+DOCKER := docker
+
 ifeq (, $(shell which docker-compose))
   DOCKER_COMPOSE_COMMAND := docker compose
   $(info Using docker compose V2 (docker compose))
@@ -326,7 +328,7 @@ DOCKER_PROJECT = $(shell echo $(DC_PROJECT) | tr A-Z a-z | tr -cd '[:alnum:]')
 destroy-db:
 	$(DOCKER_COMPOSE) down -v --remove-orphans
 	$(DOCKER_COMPOSE) rm -fv
-	docker volume ls -q -f "name=^$(DOCKER_PROJECT)_" | $(XARGS) docker volume rm
+	$(DOCKER) volume ls -q -f "name=^$(DOCKER_PROJECT)_" | $(XARGS) $(DOCKER) volume rm
 	rm -rf cache
 	mkdir cache
 
@@ -605,7 +607,7 @@ analyze-db: init-dirs
 
 .PHONY: list-docker-images
 list-docker-images:
-	docker images | grep openmaptiles
+	$(DOCKER) images | grep openmaptiles
 
 .PHONY: refresh-docker-images
 refresh-docker-images: init-dirs
